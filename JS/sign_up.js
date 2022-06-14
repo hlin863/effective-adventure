@@ -1,4 +1,5 @@
 document.write('<script src="JS/user.js"></script>');
+document.write('<script src="JS/require.js"></script>');
 
 document.getElementById('sign-up').addEventListener("click", function() {
 
@@ -13,5 +14,9 @@ document.getElementById('sign-up').addEventListener("click", function() {
     var user = new User(first_name, last_name, email, password);
 
     console.log("User: " + user.getFirstName() + " " + user.getLastName() + " " + user.getEmail() + " " + user.getPassword());
+
+    // let userFile = require("File/user.json");
+
+    const userFile = require("./user.json");
 
 })
