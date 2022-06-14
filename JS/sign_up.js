@@ -1,5 +1,6 @@
 document.write('<script src="JS/user.js"></script>');
-document.write('<script src="JS/require.js"></script>');
+document.write(
+    '<script src="https://cdn.bootcss.com/FileSaver.js/2014-11-29/FileSaver.js"></script>');
 
 document.getElementById('sign-up').addEventListener("click", function() {
 
@@ -15,10 +16,7 @@ document.getElementById('sign-up').addEventListener("click", function() {
 
     console.log("User: " + user.getFirstName() + " " + user.getLastName() + " " + user.getEmail() + " " + user.getPassword());
 
-    // let userFile = require("File/user.json");
-
-    const userFile = require(["./user.json"], (json) => { console.log(json); });
-
+    // initialise userEntry to store the JSON structure
     const userEntry = {
         "first_name": user.getFirstName(),
         "last_name": user.getLastName(),
@@ -26,14 +24,12 @@ document.getElementById('sign-up').addEventListener("click", function() {
         "password": user.getPassword()
     }
 
+    // convert the userEntry to JSON format
     const userJSON = JSON.stringify(userEntry);
 
-    userFile.writeFile("./user.json", userJSON, function(err) {
-        if (err){
-            console.log(err);
-        } else {
-            console.log("User created");
-        }
-    });
+    // create a new file
+    var blob = new Blob([userJSON], {type: "text/plain;charset=utf-8"});
+
+    saveAs(blob, "File/user.json");
 
 })
